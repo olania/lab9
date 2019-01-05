@@ -1,6 +1,7 @@
 package lab9;
 
 import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
 
 enum EyeColor {
 	blue, black, brown;
@@ -27,30 +28,12 @@ class DefaultValues {
 	static EyeColor eyeColor = EyeColor.blue;
 	static int height = 180;
 }
-private static final String[] LASTNAMES = {
-Elza Goetsch
-Lani Risinger
-Vernie Hemsley
-Soraya Desjardin
-Suzy Corpuz
-Jewel Babineau
-Luann Eilers
-Rex Critelli
-Brunilda Mascarenas
-Carey Albaugh
-Norah Tichenor
-Rosalina Gram
-Andre Eslinger
-Asia Keesee
-Kathlyn Pion
-Nancee Bortle
-Oralia Dick
-Quinn Mantle
-Garrett Heckel
-Wendell Dollar
-};
 
 class Student {
+	private static final String[] LASTNAMES = { "Goetsch", "Risinger", "Hemsley", "Desjardin", "Corpuz", 
+			"Babineau", "Eilers", "Critelli", "Mascarenas", "Albaugh", "Tichelour", "Gram", "Eslinger", "Keesee", "Pion", "Bortle",
+			"Dick", "Mantle", "Heckel", "Dollar" };
+
 	int idNumber;
 	String lastName;
 	EyeColor eyeColor;
@@ -74,9 +57,15 @@ class Student {
 		}
 
 	}
+	public static int randomValue(int min, int max) {
+		return ThreadLocalRandom.current().nextInt(min, max);
+	}
 
 	public static void main(String[] args) {
 		Student st = new Student(1, "Ivanov", EyeColor.brown, 130);
-		System.out.println(st.idNumber);
+		System.out.println(LASTNAMES[randomValue(0,20)]);
+		System.out.println(LASTNAMES[randomValue(0,20)]);
+		System.out.println(LASTNAMES[randomValue(0,20)]);
+		System.out.println(LASTNAMES[randomValue(0,20)]);
 	}
 }
