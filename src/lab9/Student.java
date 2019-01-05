@@ -1,6 +1,7 @@
 package lab9;
 
 import java.util.Date;
+import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
 
 enum EyeColor {
@@ -30,14 +31,14 @@ class DefaultValues {
 }
 
 class Student {
-	private static final String[] LASTNAMES = { "Goetsch", "Risinger", "Hemsley", "Desjardin", "Corpuz", 
-			"Babineau", "Eilers", "Critelli", "Mascarenas", "Albaugh", "Tichelour", "Gram", "Eslinger", "Keesee", "Pion", "Bortle",
+	private static final String[] LASTNAMES = { "Goetsch", "Risinger", "Hemsley", "Desjardin", "Corpuz", "Babineau",
+			"Eilers", "Critelli", "Mascarenas", "Albaugh", "Tichelour", "Gram", "Eslinger", "Keesee", "Pion", "Bortle",
 			"Dick", "Mantle", "Heckel", "Dollar" };
 
 	int idNumber;
 	String lastName;
 	EyeColor eyeColor;
-	boolean isOK;
+	boolean isOK = true;
 	int height;
 
 	public Student(int i, String lastName, EyeColor ecolor, int height) {
@@ -57,15 +58,32 @@ class Student {
 		}
 
 	}
+
 	public static int randomValue(int min, int max) {
 		return ThreadLocalRandom.current().nextInt(min, max);
 	}
 
 	public static void main(String[] args) {
-		Student st = new Student(1, "Ivanov", EyeColor.brown, 130);
-		System.out.println(LASTNAMES[randomValue(0,20)]);
-		System.out.println(LASTNAMES[randomValue(0,20)]);
-		System.out.println(LASTNAMES[randomValue(0,20)]);
-		System.out.println(LASTNAMES[randomValue(0,20)]);
+		Vector studentVector = new Vector();
+		System.out.println("Filling Vector with:");
+		for (int i = 0; i < 20; i++) {
+			Student st = new Student(randomValue(0, 200), LASTNAMES[randomValue(0, 20)], EyeColor.brown,
+					randomValue(80, 260));
+			System.out.print(i + "Student #" + st.idNumber + " name: " + st.lastName + ", Eye Color: " + st.eyeColor + " height: " + st.height + " isOK: ");
+			System.out.println(st.isOK);
+
+			if (st.isOK)
+				studentVector.add(st);
+		}
+		// System.out.println(LASTNAMES[randomValue(0,20)]);
+		// System.out.println(LASTNAMES[randomValue(0,20)]);
+		// System.out.println(LASTNAMES[randomValue(0,20)]);
+		// System.out.println();
+		for (int i = 0; i < studentVector.size(); i++) {
+			Student st = (Student) studentVector.get(i);
+			System.out.println("Student #" + st.idNumber + " name: " + st.lastName + " height: " + st.height);
+		}
+		// System.out.println((String) ((Student)
+		// studentVector.get(randomValue(0, 20))).lastName);
 	}
 }
